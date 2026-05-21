@@ -1,0 +1,48 @@
+/*
+declaration block::after
+
+selector{
+    property: value;
+    property: value;
+}   
+*/
+
+body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #101820;
+    color: #ffffff;
+    text-align: center;
+}
+
+h1{
+    color: #00ffcc;
+}
+
+p{
+    font-size: 18px;
+    color: #666;
+}
+
+nav{
+    height: 600px;
+    width: 200px;
+    float: left;
+    padding: 5px;
+    line-height: 30px;
+}
+
+footer{
+    text-align: center;
+    margin-right: 200px;
+}
+
+#memeImage{
+    margin-right: 200px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+h1{
+    text-align: center;
+}
