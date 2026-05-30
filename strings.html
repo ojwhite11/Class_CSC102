@@ -1,0 +1,200 @@
+<!-- Oshay White, 5/30/26 CSC102 : strings.html -->
+<!-- Doctype tells the browser this is an HTML5 document -->
+<!DOCTYPE html>
+<!-- The html tag wraps the entire page and sets the language -->
+<html lang="en">
+<head>
+    <!-- Meta charset sets the character encoding for the page -->
+    <meta charset="UTF-8">
+    <!-- Viewport meta tag makes the page responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title is shown on the browser tab -->
+    <title>Secret Message Access</title>
+    <!-- Link to the shared external CSS stylesheet -->
+    <link rel="stylesheet" href="main.css">
+    <!-- Link to the external JavaScript file for this page -->
+    <script src="strings.js"></script>
+    <!-- Page-specific styles for the lock icon, input cards, and reveal box -->
+    <style>
+        /* Style the main content area so it is centered on the page */
+        main {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Style the lock icon displayed above the form */
+        .lockIcon {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Style the card box that holds the form */
+        .formCard {
+            background-color: #1a2535;
+            border: 1px solid #00ffcc;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Style each label so it floats above its input */
+        .formCard label {
+            display: block;
+            color: #00ffcc;
+            font-size: 14px;
+            margin-top: 16px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        /* Style all text input boxes to match the dark theme */
+        .formCard input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0d1520;
+            border: 1px solid #00ffcc;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Highlight the input box when the user clicks into it */
+        .formCard input[type="text"]:focus {
+            outline: none;
+            border-color: #00ffee;
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+        }
+
+        /* Style the submit button to stand out */
+        .formCard input[type="submit"] {
+            margin-top: 22px;
+            width: 100%;
+            padding: 12px;
+            background-color: #00ffcc;
+            color: #101820;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        /* Darken the button slightly when the user hovers over it */
+        .formCard input[type="submit"]:hover {
+            background-color: #00d9aa;
+        }
+
+        /* Style the warning message paragraphs in red */
+        .warningText {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        /* Style the secret message reveal box */
+        .secretBox {
+            margin-top: 24px;
+            padding: 20px;
+            background-color: #0d1520;
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            min-height: 24px;
+            color: #00ffcc;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Style the highlighted span inside the secret message */
+        .revealMessage {
+            color: #ffffff;
+            font-style: italic;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<!-- Body holds all visible page content -->
+<body>
+
+    <!-- Header section holds the page title and navigation -->
+    <header>
+        <!-- Main page heading -->
+        <h1>Quarks Casino Secret Vault</h1>
+
+        <!-- Navigation menu linking to all site pages -->
+        <nav>
+            <!-- Link to the homepage -->
+            <a href="index.html">Home</a>
+            <br>
+            <!-- Link to the boards page -->
+            <a href="boards.html">Boards</a>
+            <br>
+            <!-- Link to the coin flip game page -->
+            <a href="game.html">Game</a>
+            <br>
+            <!-- Link to this strings page -->
+            <a href="strings.html">Strings</a>
+        </nav>
+    </header>
+
+    <!-- Main content area for the form and results -->
+    <main>
+
+        <!-- Lock emoji used as a creative visual element -->
+        <span class="lockIcon">&#128274;</span>
+
+        <!-- Subheading that tells the user what to do -->
+        <h2>Prove Your Identity to Access the Secret</h2>
+
+        <!-- Introductory paragraph explaining the form -->
+        <p style="color: #aaaaaa; font-size: 14px;">
+            Enter your full name and zip code below.<br>
+            If your credentials check out, the vault will open.
+        </p>
+
+        <!-- Card container that visually groups the form -->
+        <div class="formCard">
+
+            <!-- Form that collects all user input at once via a single submit -->
+            <form onsubmit="return validateInputs();">
+
+                <!-- Label for the first name input -->
+                <label for="firstName">First Name</label>
+                <!-- Text box for the user to enter their first name -->
+                <input type="text" id="firstName" placeholder="Enter first name" required>
+
+                <!-- Label for the last name input -->
+                <label for="lastName">Last Name</label>
+                <!-- Text box for the user to enter their last name -->
+                <input type="text" id="lastName" placeholder="Enter last name" required>
+
+                <!-- Label for the zip code input -->
+                <label for="zipCode">Zip Code</label>
+                <!-- Text box for the user to enter their 5-digit zip code -->
+                <input type="text" id="zipCode" placeholder="Enter 5-digit zip code" required>
+
+                <!-- Single submit button that triggers validation for all inputs -->
+                <input type="submit" value="Unlock the Vault">
+
+            </form>
+
+        </div>
+
+        <!-- Paragraph that shows a warning if the full name is too long -->
+        <p id="nameMessage" class="warningText"></p>
+
+        <!-- Paragraph that shows a warning if the zip code is invalid -->
+        <p id="zipMessage" class="warningText"></p>
+
+        <!-- Box that reveals the secret message when all inputs are valid -->
+        <div id="secretMessage" class="secretBox"></div>
+
+    </main>
+
+</body>
+</html>
