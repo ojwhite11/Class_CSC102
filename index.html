@@ -1,49 +1,136 @@
 <!-- Oshay White, 5/24/26 CSC102 : index.html -->
- <!--Doctype this is the first tag on the page and it tells the browser what type of document it is-->
+<!--Doctype this is the first tag on the page and it tells the browser what type of document it is-->
 <!DOCTYPE html>
 <!--the html tag goes next-->
 <html lang="en">
+<!-- head section contains settings and resources for the browser -->
 <head>
     <!--the head section has info for the browser and search engines-->
     <meta charset="UTF-8">
+    <!-- viewport meta tag makes the page scale correctly on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title sets the text shown in the browser tab -->
     <title>Oshay's CSC102 Homepage</title>
     <!--add link to the css file-->
     <link rel="stylesheet" href="main.css">
+    <!-- import Orbitron from Google Fonts as the creative custom font element -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- style block for movement-specific styles and button design -->
+    <style>
+        /* apply the imported Orbitron sci-fi font to the main heading */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        /* fix the meme image position so JavaScript can move it freely over the page */
+        #memeImage {
+            position: fixed;
+            /* size increased from original 150px so it stands out more */
+            width: 275px;
+            /* button.js sets left and top on load so the image starts centered */
+            /* keep the glowing border from main.css */
+            border-radius: 15px;
+            box-shadow: 0 0 15px #00ffcc;
+            /* place image above all other content */
+            z-index: 50;
+        }
+        /* center the button controls on the page */
+        #controls {
+            margin-top: 20px;
+        }
+        /* style the Start button with the cyan color from the site theme */
+        #startBtn {
+            background-color: #00ffcc;
+            color: #101820;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        /* style the Stop button with a contrasting red color */
+        #stopBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        /* visually dim disabled buttons so the user knows they cannot be clicked */
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        /* style the area where status messages will appear */
+        #statusMessage {
+            margin-top: 12px;
+            font-size: 18px;
+            color: #00ffcc;
+        }
+    </style>
 </head>
 
 <!-- the body section holds the text and images that we want to show to the user -->
 <body>
     <!--this section will have things like the menu or logo or page title -->
     <header>
+       <!-- main heading displayed at the top of the page -->
        <h1>Welcome to my CSC102 Home Page</h1>
        <!--create a nav section to hold the menu -->
        <nav>
+         <!-- link back to the home page -->
          <a href="index.html">Home</a>
          <br>
+         <!-- link to the boards page -->
          <a href="boards.html">Boards</a>
          <br>
+         <!-- link to the game page -->
          <a href="game.html">Game</a>
          <br>
-         <a href="strings.html">Strings</a>
+         <!-- link to the strings page -->
+         <a href="strings.html">The Vault</a>
        </nav>
     </header>
 
+    <!-- paragraph holding the meme image that will be animated by button.js -->
     <p>
-        <!-- img is the image tag -->
+        <!-- img is the image tag; button.js will update its left and top to move it -->
         <img id="memeImage" src="meme.png">
     </p>
 
-     <footer>
+    <!-- div containing the Start and Stop control buttons -->
+    <div id="controls">
+        <!-- Start button: uses onclick to call startMoving from button.js, enabled by default -->
+        <button id="startBtn" onclick="startMoving()">Start</button>
+        <!-- Stop button: uses onclick to call stopMoving from button.js, disabled until Start is clicked -->
+        <button id="stopBtn" onclick="stopMoving()" disabled>Stop</button>
+    </div>
+
+    <!-- div where status messages will be written using innerHTML -->
+    <div id="statusMessage"></div>
+
+    <!-- footer section displays author and school contact information -->
+    <footer>
+        <!-- display the author's full name -->
         Oshay White
         <br>
+        <!-- display the name of the school -->
         University of Advancing Technology
         <br>
+        <!-- display the school street address -->
         2625 W. Baseline Road
         <br>
+        <!-- display city, state, and zip code -->
         Tempe, AZ 85283-1056
         <br>
     </footer>
 
+    <!-- link to the external JavaScript file that contains the button functions -->
+    <script src="button.js"></script>
 </body>
 </html>
