@@ -52,8 +52,78 @@ function validateInputs() {
         "<br><br>" +
         "<span class='revealMessage'>" +
         "The universe's best kept secret: the answer to everything is 42..." +
-        "but only those who ask the right question ever find the door." +
+        "but only those who ask the right question, ever find the door." +
         "</span>";
+
+    // Return false to prevent the form from reloading the page.
+    return false;
+}
+
+// This function checks every word/phrase the user entered to see if it is a palindrome.
+function checkPalindromes() {
+
+    // Get the value from the palindrome input box and remove leading/trailing spaces.
+    let userInput = document.getElementById("palindromeInput").value.trim();
+
+    // Clear any previous results so old output is removed.
+    document.getElementById("palindromeResults").innerHTML = "";
+
+    // Check if the user left the input box empty.
+    if (userInput === "") {
+
+        // Display a message asking the user to enter at least one word, using innerHTML.
+        document.getElementById("palindromeResults").innerHTML =
+            "Please enter a word or phrase before submitting.";
+
+        // Return false to stop the form from reloading the page.
+        return false;
+    }
+
+    // Split the user's input into a list of separate words/phrases using commas.
+    let wordList = userInput.split(",");
+
+    // Create an empty string that will collect all of the result messages.
+    let output = "";
+
+    // Loop through every word/phrase the user entered, one at a time.
+    for (let i = 0; i < wordList.length; i++) {
+
+        // Get the current word/phrase and remove leading/trailing spaces.
+        let currentWord = wordList[i].trim();
+
+        // If this entry is empty (caused by an extra comma), skip it and check the next one.
+        if (currentWord === "") {
+            continue;
+        }
+
+        // Remove all spaces and convert to lowercase so the comparison ignores spacing and case.
+        let cleanedWord = currentWord.toLowerCase().split(" ").join("");
+
+        // Start with an empty string that will hold the reversed version of the word.
+        let reversedWord = "";
+
+        // Loop through the cleaned word from the last character to the first.
+        for (let j = cleanedWord.length - 1; j >= 0; j--) {
+
+            // Add the current character onto the end of the reversed string.
+            reversedWord = reversedWord + cleanedWord[j];
+        }
+
+        // Compare the cleaned word to its reversed version.
+        if (cleanedWord === reversedWord) {
+
+            // Add a success message for this word to the output, styled in green.
+            output = output + "<p class='palindromeYes'>\"" + currentWord + "\" is a palindrome! &#9989;</p>";
+
+        } else {
+
+            // Add a failure message for this word to the output, styled in red.
+            output = output + "<p class='palindromeNo'>\"" + currentWord + "\" is not a palindrome. &#10060;</p>";
+        }
+    }
+
+    // Display every result message at once using innerHTML.
+    document.getElementById("palindromeResults").innerHTML = output;
 
     // Return false to prevent the form from reloading the page.
     return false;

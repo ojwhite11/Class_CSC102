@@ -115,6 +115,95 @@
             font-style: italic;
             font-size: 16px;
         }
+
+        /* Style the mirror icon shown above the palindrome form */
+        .mirrorIcon {
+            font-size: 64px;
+            display: block;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* Style the card box that holds the palindrome form */
+        .palindromeCard {
+            background-color: #2a1a35;
+            border: 1px solid #ff66cc;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 0 20px rgba(255, 102, 204, 0.2);
+        }
+
+        /* Style the label above the palindrome textbox */
+        .palindromeCard label {
+            display: block;
+            color: #ff66cc;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        /* Style the palindrome text input to match the new color theme */
+        .palindromeCard input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0d1520;
+            border: 1px solid #ff66cc;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Highlight the palindrome textbox when the user clicks into it */
+        .palindromeCard input[type="text"]:focus {
+            outline: none;
+            border-color: #ff99dd;
+            box-shadow: 0 0 8px rgba(255, 102, 204, 0.5);
+        }
+
+        /* Style the submit button for the palindrome form */
+        .palindromeCard input[type="submit"] {
+            margin-top: 18px;
+            width: 100%;
+            padding: 12px;
+            background-color: #ff66cc;
+            color: #101820;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        /* Darken the palindrome submit button slightly on hover */
+        .palindromeCard input[type="submit"]:hover {
+            background-color: #ff3399;
+        }
+
+        /* Style the box that holds the palindrome results */
+        .palindromeResultsBox {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #0d1520;
+            border: 2px solid #ff66cc;
+            border-radius: 10px;
+            min-height: 24px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Style each message for a word that IS a palindrome */
+        .palindromeYes {
+            color: #66ff99;
+            margin: 6px 0;
+        }
+
+        /* Style each message for a word that is NOT a palindrome */
+        .palindromeNo {
+            color: #ff6666;
+            margin: 6px 0;
+        }
     </style>
 </head>
 
@@ -128,6 +217,8 @@
 
         <!-- Navigation menu linking to all site pages -->
         <nav>
+            <!-- Menu heading -->
+            <h2>Menu</h2>
             <!-- Link to the homepage -->
             <a href="index.html">Home</a>
             <br>
@@ -193,6 +284,39 @@
 
         <!-- Box that reveals the secret message when all inputs are valid -->
         <div id="secretMessage" class="secretBox"></div>
+
+        <!-- Mirror emoji used as a creative visual element for the palindrome section -->
+        <span class="mirrorIcon">&#129481;</span>
+
+        <!-- Subheading that introduces the palindrome checker -->
+        <h2>Palindrome Checker</h2>
+
+        <!-- Introductory paragraph explaining how to use the palindrome checker -->
+        <p style="color: #aaaaaa; font-size: 14px;">
+            Enter a word or phrase to check.<br>
+            To check more than one, separate them with commas (for example: radar, hello, race car).
+        </p>
+
+        <!-- Card container that visually groups the palindrome form -->
+        <div class="palindromeCard">
+
+            <!-- Form that loops through every word the user enters and checks it on submit -->
+            <form onsubmit="return checkPalindromes();">
+
+                <!-- Label for the palindrome input box -->
+                <label for="palindromeInput">Word or Phrase</label>
+                <!-- Text box for the user to enter one or more words/phrases -->
+                <input type="text" id="palindromeInput" placeholder="Enter a word or phrase">
+
+                <!-- Submit button that triggers the palindrome check -->
+                <input type="submit" value="Check for Palindromes">
+
+            </form>
+
+        </div>
+
+        <!-- Box that displays the palindrome results for every word entered -->
+        <div id="palindromeResults" class="palindromeResultsBox"></div>
 
     </main>
 
