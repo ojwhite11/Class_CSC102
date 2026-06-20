@@ -90,7 +90,7 @@ function checkPalindromes() {
 
         // Get the current word/phrase and remove leading/trailing spaces.
         let currentWord = wordList[i].trim();
-
+        
         // If this entry is empty (caused by an extra comma), skip it and check the next one.
         if (currentWord === "") {
             continue;

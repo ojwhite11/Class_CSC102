@@ -49,3 +49,87 @@ function showMessage(playerGuess) {
     document.getElementById("playerMessage").innerHTML =
         "You guessed " + playerGuess + ". Thanks for playing Quarks Casino!";
 }
+
+// Module 5 OOP classes: Rocket and Payload
+
+class Rocket
+{
+    // Default constructor
+    constructor ()
+    {
+        this.name = "Falcon 9";
+        this.fuelLevel = 100;
+        this.isLaunched = false;
+    }
+
+    // Standard constructor
+    /*constructor (name, fuelLevel, isLaunched)
+    {
+        this.name = name;
+        this.fuelLevel = fuelLevel;
+        this.isLaunched = isLaunched;
+    }*/
+
+    launch()
+    {
+        alert("The " + this.name + " has launched!");
+    }
+
+    refuel()
+    {
+        alert("The " + this.name + " is refueling. Fuel level: " + this.fuelLevel + "%");
+    }
+
+    getStatus()
+    {
+        alert("Rocket: " + this.name + " | Launched: " + this.isLaunched + " | Fuel: " + this.fuelLevel + "%");
+    }
+}
+
+class Payload
+{
+    // Default constructor
+    constructor ()
+    {
+        this.name = "Satellite";
+        this.mass = 3.14;
+        this.isDeployed = false;
+    }
+
+    // Standard constructor
+    /*constructor (name, mass, isDeployed)
+    {
+        this.name = name;
+        this.mass = mass;
+        this.isDeployed = isDeployed;
+    }*/
+
+    deploy()
+    {
+        alert("Payload " + this.name + " has been deployed!");
+    }
+
+    inspect()
+    {
+        alert("Inspecting payload: " + this.name + " | Mass: " + this.mass + " kg");
+    }
+
+    getInfo()
+    {
+        alert("Payload: " + this.name + " | Mass: " + this.mass + " kg | Deployed: " + this.isDeployed);
+    }
+}
+
+// Demo: Rocket object
+var newRocket = new Rocket();
+alert(newRocket.name);
+newRocket.launch();
+newRocket.refuel();
+newRocket.getStatus();
+
+// Demo: Payload object
+var newPayload = new Payload();
+alert(newPayload.name);
+newPayload.deploy();
+newPayload.inspect();
+newPayload.getInfo();
