@@ -1,4 +1,4 @@
-<!-- Oshay White, 5/24/26 CSC102 : index.html -->
+<!-- Oshay White, 6/19/26 CSC102 : index.html -->
 <!--Doctype this is the first tag on the page and it tells the browser what type of document it is-->
 <!DOCTYPE html>
 <!--the html tag goes next-->
@@ -72,6 +72,40 @@
             font-size: 18px;
             color: #00ffcc;
         }
+        /* center the sound control buttons on the page, same as the meme controls */
+        #soundControls {
+            margin-top: 20px;
+        }
+        /* style the Play Sound button with the same cyan color as the Start button */
+        #playSoundBtn {
+            background-color: #00ffcc;
+            color: #101820;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        /* style the Mute Sound button with the same red color as the Stop button */
+        #muteSoundBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        /* style the area where sound status messages will appear */
+        #soundStatus {
+            margin-top: 12px;
+            font-size: 18px;
+            color: #00ffcc;
+        }
     </style>
 </head>
 
@@ -116,6 +150,23 @@
     <!-- div where status messages will be written using innerHTML -->
     <div id="statusMessage"></div>
 
+    <!-- hidden audio element loaded with the NASA ISS background ambience track -->
+    <!-- loop attribute makes the track repeat automatically once it finishes -->
+    <audio id="bgAudio" src="us-lab-background.mp3" loop></audio>
+
+    <!-- div containing the Play and Mute buttons for the background sound -->
+    <div id="soundControls">
+        <!-- heading that introduces the background sound as a creative element -->
+        <h2>NASA ISS Background Sound</h2>
+        <!-- Play button: uses onclick to call playSound from sound.js, enabled by default -->
+        <button id="playSoundBtn" onclick="playSound()">Play Sound</button>
+        <!-- Mute button: uses onclick to call stopSound from sound.js, disabled until Play is clicked -->
+        <button id="muteSoundBtn" onclick="stopSound()" disabled>Mute Sound</button>
+    </div>
+
+    <!-- div where sound status messages will be written using innerHTML -->
+    <div id="soundStatus"></div>
+
     <!-- footer section displays author and school contact information -->
     <footer>
         <!-- display the author's full name -->
@@ -134,5 +185,7 @@
 
     <!-- link to the external JavaScript file that contains the button functions -->
     <script src="button.js"></script>
+    <!-- link to the external JavaScript file that contains the sound functions -->
+    <script src="sound.js"></script>
 </body>
 </html>
