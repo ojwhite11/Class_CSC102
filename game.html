@@ -1,4 +1,4 @@
-<!-- Oshay White, 6/13/26 CSC102 : game.html -->
+<!-- Oshay White, 6/21/26 CSC102 : game.html -->
 <!-- Doctype tells the browser this is an HTML5 document -->
 <!DOCTYPE html>
 <!-- The html tag wraps the entire page -->
@@ -13,6 +13,123 @@
     <link rel="stylesheet" href="main.css">
     <!-- Add link to external JavaScript file -->
     <script src="code.js"></script>
+    <!-- Page-specific styles for the new casino betting/stats section -->
+    <style>
+        /* Center the main content column on the page, independent of the floated menu */
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Style the card that holds the player name form */
+        .playerCard {
+            max-width: 520px;
+            margin: 20px auto;
+            background-color: #1a2535;
+            border: 1px solid #00ffcc;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Style the card that holds the bet form */
+        .betCard {
+            max-width: 520px;
+            margin: 20px auto;
+            background-color: #1a2535;
+            border: 1px solid #00ffcc;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Style every label inside the new betting cards */
+        .playerCard label, .betCard label {
+            display: block;
+            color: #00ffcc;
+            font-size: 14px;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        /* Style the text and number inputs inside the new betting cards */
+        .playerCard input[type="text"],
+        .betCard input[type="text"],
+        .betCard input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0d1520;
+            border: 1px solid #00ffcc;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Style the submit buttons inside the new betting cards */
+        .playerCard input[type="submit"],
+        .betCard input[type="submit"] {
+            margin-top: 18px;
+            width: 100%;
+            padding: 12px;
+            background-color: #00ffcc;
+            color: #101820;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        /* Darken the submit buttons slightly when hovered */
+        .playerCard input[type="submit"]:hover,
+        .betCard input[type="submit"]:hover {
+            background-color: #00d9aa;
+        }
+
+        /* Style the warning/result message paragraphs in the betting section */
+        .warningText {
+            max-width: 520px;
+            margin: 10px auto;
+            color: #ff4d4d;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        /* Style the panel that displays the player's live stats and bet history */
+        .statsPanel {
+            max-width: 520px;
+            margin: 0 auto 20px auto;
+            background-color: #0d1520;
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: left;
+            color: #00ffcc;
+        }
+
+        /* Style the reset button so it stands out as a separate action */
+        .resetButton {
+            background-color: #ff4d4d;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        /* Darken the reset button slightly when hovered */
+        .resetButton:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,36 +155,78 @@
         <!-- Link to strings page -->
         <a href="./strings.html">The Vault</a>
         <br>
+        <!-- Link to table page -->
+        <a href="./table.html">Table</a>
+        <br>
     </nav>
 
     <!-- Main page content -->
     <main>
-        <h2>Choose Heads or Tails!</h2>
-          <!-- Casino game image -->
+        <!-- Casino game image -->
         <img id="casinoImage" src="casino.png" width="600">
         <br>
         <br>
-        <!-- Form used for player input -->
-        <form onsubmit="return playCoinGame();">
 
-            <!-- Label for text input -->
-            <label for="guess">Enter heads or tails:</label>
-            <br>
-            <br>
-            <!-- User input box -->
-            <input type="text" id="guess" required>
-            <br>
-            <br>
-            <!-- Submit button -->
-            <input type="submit" value="Flip Coin">
+        <!-- Heading for the new casino betting/stats section -->
+        <h2>Casino Betting Table</h2>
+        <!-- Coin emoji used as a creative visual element for the betting section -->
+        <span style="font-size: 48px;">&#129689;</span>
 
-        </form>
+        <!-- Card that holds the player name form -->
+        <div class="playerCard">
 
-        <br>
-        <!-- Displays game results -->
-        <p id="gameResult"></p>
-        <!-- Displays player message -->
-        <p id="playerMessage"></p>
+            <!-- Form that creates a new Player object once the name is validated -->
+            <form onsubmit="return startGame();">
+
+                <!-- Label for the player name input -->
+                <label for="playerName">Enter your name to start playing:</label>
+                <!-- Text box where the player types their name -->
+                <input type="text" id="playerName" placeholder="Your name" required>
+
+                <!-- Submit button that starts the game and creates the Player object -->
+                <input type="submit" value="Start Game">
+
+            </form>
+
+        </div>
+
+        <!-- Message that shows name validation errors or a welcome message -->
+        <p id="nameError" class="warningText"></p>
+
+        <!-- Card that holds the bet form -->
+        <div class="betCard">
+
+            <!-- Form that places a bet once the guess and amount are validated -->
+            <form onsubmit="return placeBet();">
+
+                <!-- Label for the bet guess input -->
+                <label for="betGuess">Guess heads or tails:</label>
+                <!-- Text box where the player types their guess -->
+                <input type="text" id="betGuess" placeholder="heads or tails" required>
+
+                <!-- Label for the bet amount input -->
+                <label for="betAmount">Bet amount (chips):</label>
+                <!-- Number box where the player enters how many chips to bet -->
+                <input type="number" id="betAmount" placeholder="e.g. 10" required>
+
+                <!-- Submit button that places the bet and flips the coin -->
+                <input type="submit" value="Place Bet">
+
+            </form>
+
+        </div>
+
+        <!-- Message that shows bet validation errors or the flip result -->
+        <p id="betMessage" class="warningText"></p>
+
+        <!-- Panel that displays the player's live stats and bet history, filled by displayStats() -->
+        <div id="statsPanel" class="statsPanel">
+            <!-- Default message shown before any player has been created -->
+            <p>No active player. Enter a name above to start playing.</p>
+        </div>
+
+        <!-- Button that resets the player and clears the betting game; not a form since it collects no input -->
+        <button type="button" class="resetButton" onclick="resetPlayer();">Reset Player</button>
     </main>
 
 </body>

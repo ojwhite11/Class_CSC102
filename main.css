@@ -24,12 +24,36 @@ p{
     color: #666;
 }
 
+/* Style the menu like the project's other card components: cyan glow card look */
 nav{
-    height: 600px;
+    /* removed fixed height so the card sizes to its content instead of leaving empty space below the links */
     width: 200px;
     float: left;
-    padding: 5px;
+    padding: 16px;
     line-height: 30px;
+    /* keeps the padding inside the existing 200px width instead of growing it */
+    box-sizing: border-box;
+    background-color: #1a2535;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.15);
+}
+
+/* Keep the "Menu" heading in the site's cyan accent color */
+nav h2{
+    color: #00ffcc;
+}
+
+/* Keep menu links in the cyan accent color with no underline by default */
+nav a{
+    color: #00ffcc;
+    text-decoration: none;
+}
+
+/* Lighten and underline menu links on hover for a subtle interactive cue */
+nav a:hover{
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 footer{

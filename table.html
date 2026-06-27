@@ -1,0 +1,223 @@
+<!-- Oshay White, 6/27/26 CSC102 : table.html -->
+<!-- Doctype tells the browser this is an HTML5 document -->
+<!DOCTYPE html>
+<!-- The html tag wraps the entire page and sets the language -->
+<html lang="en">
+<head>
+    <!-- Meta charset sets the character encoding for the page -->
+    <meta charset="UTF-8">
+    <!-- Viewport meta tag makes the page responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title is shown on the browser tab -->
+    <title>3D Printer Filament Reference</title>
+    <!-- Link to the shared external CSS stylesheet -->
+    <link rel="stylesheet" href="main.css">
+    <!-- Page-specific styles for the filament temperature reference table -->
+    <style>
+        /* Center the main content area on the page, matching the other pages */
+        main {
+            /* Wider than the form pages since the table has five columns */
+            max-width: 700px;
+            /* Auto left/right margin centers the block horizontally */
+            margin: 0 auto;
+            /* Padding keeps the content off the page edges */
+            padding: 30px 20px;
+        }
+
+        /* Style the table itself to match the dark cyan-accent card theme */
+        table {
+            /* Table fills the width of the centered main area */
+            width: 100%;
+            /* Collapse borders so cell borders do not double up */
+            border-collapse: collapse;
+            /* Space the table away from the heading above it */
+            margin-top: 20px;
+            /* Dark background to match the other cards on the site */
+            background-color: #1a2535;
+            /* Cyan border around the whole table to match the site accent color */
+            border: 2px solid #00ffcc;
+            /* Soft cyan glow like the other cards on the site */
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Style every header and body cell with a border and padding */
+        th, td {
+            /* Thin cyan border around each cell */
+            border: 1px solid #00ffcc;
+            /* Padding so text is not crammed against the cell border */
+            padding: 12px 16px;
+            /* Center the text inside every cell */
+            text-align: center;
+        }
+
+        /* Color the header row text cyan to match the site accent color */
+        th {
+            /* Cyan text for column titles */
+            color: #00ffcc;
+            /* Slightly darker background so the header row stands out */
+            background-color: #0d1520;
+            /* Font size for the column titles */
+            font-size: 15px;
+        }
+
+        /* Color the body cell text white so it stays readable on the dark background */
+        td {
+            /* White text for the data rows */
+            color: #ffffff;
+            /* Font size for the data rows */
+            font-size: 14px;
+        }
+
+        /* Lighten the row background slightly when hovered for a subtle interactive cue */
+        tbody tr:hover {
+            /* Lighter navy shade shown only while hovering a data row */
+            background-color: #233045;
+        }
+    </style>
+</head>
+
+<!-- Body holds all visible page content -->
+<body>
+
+    <!-- Header section holds the page title and navigation -->
+    <header>
+        <!-- Main page heading -->
+        <h1>Filament Reference Chart</h1>
+
+        <!-- Navigation menu linking to all site pages -->
+        <nav>
+            <!-- Menu heading -->
+            <h2>Menu</h2>
+            <!-- Link to the homepage -->
+            <a href="index.html">Home</a>
+            <br>
+            <!-- Link to the boards page -->
+            <a href="boards.html">Boards</a>
+            <br>
+            <!-- Link to the coin flip game page -->
+            <a href="game.html">Game</a>
+            <br>
+            <!-- Link to the strings page -->
+            <a href="strings.html">The Vault</a>
+            <br>
+            <!-- Link to this table page -->
+            <a href="table.html">Table</a>
+        </nav>
+    </header>
+
+    <!-- Main content area holds the filament temperature reference table -->
+    <main>
+
+        <!-- Subheading that introduces the table -->
+        <h2>3D Printer Filament Temperature Reference</h2>
+
+        <!-- Introductory paragraph explaining what the table shows -->
+        <p style="color: #aaaaaa; font-size: 14px;">
+            Recommended nozzle and bed temperatures, print speed, and cooling settings for common 3D printer filaments.
+        </p>
+
+        <!-- Table that lists temperature and speed settings for each filament type -->
+        <table>
+            <!-- Table head holds the column title row -->
+            <thead>
+                <!-- Header row with one column title per piece of data -->
+                <tr>
+                    <!-- Column heading for the filament name -->
+                    <th>Filament</th>
+                    <!-- Column heading for the nozzle temperature -->
+                    <th>Nozzle Temp (&deg;C)</th>
+                    <!-- Column heading for the bed temperature -->
+                    <th>Bed Temp (&deg;C)</th>
+                    <!-- Column heading for the print speed -->
+                    <th>Print Speed (mm/s)</th>
+                    <!-- Column heading for the cooling fan setting -->
+                    <th>Cooling Fan</th>
+                </tr>
+            </thead>
+            <!-- Table body holds the actual filament data, one row per filament type -->
+            <tbody>
+                <!-- Row for PLA -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>PLA</td>
+                    <!-- Nozzle temperature range -->
+                    <td>200&ndash;220</td>
+                    <!-- Bed temperature range -->
+                    <td>50&ndash;60</td>
+                    <!-- Print speed range -->
+                    <td>50&ndash;60</td>
+                    <!-- Cooling fan percentage -->
+                    <td>100%</td>
+                </tr>
+                <!-- Row for PETG -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>PETG</td>
+                    <!-- Nozzle temperature range -->
+                    <td>230&ndash;250</td>
+                    <!-- Bed temperature range -->
+                    <td>70&ndash;85</td>
+                    <!-- Print speed range -->
+                    <td>40&ndash;50</td>
+                    <!-- Cooling fan percentage range -->
+                    <td>30&ndash;50%</td>
+                </tr>
+                <!-- Row for ABS -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>ABS</td>
+                    <!-- Nozzle temperature range -->
+                    <td>230&ndash;260</td>
+                    <!-- Bed temperature range -->
+                    <td>95&ndash;110</td>
+                    <!-- Print speed range -->
+                    <td>40&ndash;60</td>
+                    <!-- Cooling fan percentage range -->
+                    <td>0&ndash;20%</td>
+                </tr>
+                <!-- Row for TPU -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>TPU</td>
+                    <!-- Nozzle temperature range -->
+                    <td>220&ndash;240</td>
+                    <!-- Bed temperature range -->
+                    <td>40&ndash;60</td>
+                    <!-- Print speed range -->
+                    <td>20&ndash;30</td>
+                    <!-- Cooling fan percentage range -->
+                    <td>50&ndash;100%</td>
+                </tr>
+                <!-- Row for Nylon -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>Nylon</td>
+                    <!-- Nozzle temperature range -->
+                    <td>240&ndash;270</td>
+                    <!-- Bed temperature range -->
+                    <td>70&ndash;90</td>
+                    <!-- Print speed range -->
+                    <td>30&ndash;50</td>
+                    <!-- Cooling fan percentage range -->
+                    <td>0&ndash;20%</td>
+                </tr>
+                <!-- Row for ASA -->
+                <tr>
+                    <!-- Filament name -->
+                    <td>ASA</td>
+                    <!-- Nozzle temperature range -->
+                    <td>240&ndash;260</td>
+                    <!-- Bed temperature range -->
+                    <td>95&ndash;110</td>
+                    <!-- Print speed range -->
+                    <td>40&ndash;60</td>
+                    <!-- Cooling fan percentage range -->
+                    <td>0&ndash;20%</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+</body>
+</html>

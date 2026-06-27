@@ -1,4 +1,4 @@
-<!-- Oshay White, 6/19/26 CSC102 : index.html -->
+<!-- Oshay White, 6/27/26 CSC102 : index.html -->
 <!--Doctype this is the first tag on the page and it tells the browser what type of document it is-->
 <!DOCTYPE html>
 <!--the html tag goes next-->
@@ -17,6 +17,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <!-- style block for movement-specific styles and button design -->
     <style>
+        /* center the main content column on the page, independent of the floated menu - same pattern as game.html */
+        main {
+            /* matches the max-width used on game.html's main wrapper */
+            max-width: 600px;
+            /* auto left/right margin centers the block relative to the full page */
+            margin: 0 auto;
+            /* keeps content off the page edges */
+            padding: 30px 20px;
+        }
         /* apply the imported Orbitron sci-fi font to the main heading */
         h1 {
             font-family: 'Orbitron', sans-serif;
@@ -106,15 +115,17 @@
             font-size: 18px;
             color: #00ffcc;
         }
+        /* reset the old float-offset margin now that the footer lives inside the centered main wrapper */
+        footer {
+            margin-right: 0;
+        }
     </style>
 </head>
 
 <!-- the body section holds the text and images that we want to show to the user -->
 <body>
-    <!--this section will have things like the menu or logo or page title -->
+    <!--this section holds the menu, pinned to the left of the page -->
     <header>
-       <!-- main heading displayed at the top of the page -->
-       <h1>Welcome to my CSC102 Home Page</h1>
        <!--create a nav section to hold the menu -->
        <nav>
         <!-- Menu heading -->
@@ -130,8 +141,17 @@
          <br>
          <!-- link to the strings page -->
          <a href="strings.html">The Vault</a>
+         <br>
+         <!-- link to the table page -->
+         <a href="table.html">Table</a>
        </nav>
     </header>
+
+    <!-- main element centers all primary page content relative to the full page, matching game.html -->
+    <main>
+
+    <!-- main heading displayed at the top of the page -->
+    <h1>Welcome to my CSC102 Home Page</h1>
 
     <!-- paragraph holding the meme image that will be animated by button.js -->
     <p>
@@ -182,6 +202,8 @@
         Tempe, AZ 85283-1056
         <br>
     </footer>
+
+    </main>
 
     <!-- link to the external JavaScript file that contains the button functions -->
     <script src="button.js"></script>
