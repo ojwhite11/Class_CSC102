@@ -1,213 +1,229 @@
 <!-- Oshay White, 6/27/26 CSC102 : index.html -->
-<!--Doctype this is the first tag on the page and it tells the browser what type of document it is-->
+<!-- Doctype this is the first tag on the page and it tells the browser what type of document it is -->
 <!DOCTYPE html>
-<!--the html tag goes next-->
+<!-- the html tag goes next -->
 <html lang="en">
 <!-- head section contains settings and resources for the browser -->
 <head>
-    <!--the head section has info for the browser and search engines-->
+    <!-- the head section has info for the browser and search engines -->
     <meta charset="UTF-8">
     <!-- viewport meta tag makes the page scale correctly on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- title sets the text shown in the browser tab -->
-    <title>Oshay's CSC102 Homepage</title>
-    <!--add link to the css file-->
+    <title>Oshay's CSC102 Landing Page</title>
+    <!-- add link to the shared css file -->
     <link rel="stylesheet" href="main.css">
-    <!-- import Orbitron from Google Fonts as the creative custom font element -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <!-- style block for movement-specific styles and button design -->
+    <!-- page-specific styles for the landing page hero text and link cards -->
     <style>
-        /* center the main content column on the page, independent of the floated menu - same pattern as game.html */
+        /* center the main content column on the page, independent of the floated menu - same pattern as game.html, strings.html, and table.html */
         main {
-            /* matches the max-width used on game.html's main wrapper */
-            max-width: 600px;
+            /* wide enough to comfortably fit two cards per row */
+            max-width: 700px;
             /* auto left/right margin centers the block relative to the full page */
             margin: 0 auto;
             /* keeps content off the page edges */
             padding: 30px 20px;
         }
-        /* apply the imported Orbitron sci-fi font to the main heading */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
+
+        /* make the welcome heading stand out as the largest text on the page */
+        main h1 {
+            /* larger than the default h1 size so it reads as the page hero */
+            font-size: 32px;
+            /* tighten the gap above the intro paragraph */
+            margin-bottom: 10px;
         }
-        /* fix the meme image position so JavaScript can move it freely over the page */
-        #memeImage {
-            position: fixed;
-            /* size increased from original 150px so it stands out more */
-            width: 275px;
-            /* button.js sets left and top on load so the image starts centered */
-            /* keep the glowing border from main.css */
-            border-radius: 15px;
-            box-shadow: 0 0 15px #00ffcc;
-            /* place image above all other content */
-            z-index: 50;
-        }
-        /* center the button controls on the page */
-        #controls {
-            margin-top: 20px;
-        }
-        /* style the Start button with the cyan color from the site theme */
-        #startBtn {
-            background-color: #00ffcc;
-            color: #101820;
-            border: none;
-            padding: 10px 24px;
+
+        /* style the intro paragraph so it reads clearly on the dark background */
+        .introText {
+            /* lighter than main.css's default grey so it stays readable on the dark theme */
+            color: #cccccc;
             font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            font-weight: bold;
+            line-height: 1.5;
+            margin-bottom: 30px;
         }
-        /* style the Stop button with a contrasting red color */
-        #stopBtn {
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            font-weight: bold;
+
+        /* lay the page link cards out in a responsive two-column grid */
+        .cardGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
-        /* visually dim disabled buttons so the user knows they cannot be clicked */
-        button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
+
+        /* drop to a single column once the screen gets narrow */
+        @media (max-width: 600px) {
+            .cardGrid {
+                grid-template-columns: 1fr;
+            }
         }
-        /* style the area where status messages will appear */
-        #statusMessage {
-            margin-top: 12px;
-            font-size: 18px;
+
+        /* remove the default underline/color from the link wrapping each card */
+        .cardLink {
+            text-decoration: none;
+            /* block display lets the whole card area receive clicks */
+            display: block;
+        }
+
+        /* give every card the same dark cyan-accented look used elsewhere on the site */
+        .card {
+            background-color: #1a2535;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
+            /* lets every card in a row match height regardless of description length */
+            height: 100%;
+            box-sizing: border-box;
+            /* smooth transition for the hover glow effect */
+            transition: box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        /* brighten the glow and background slightly on hover as a subtle interactive cue */
+        .card:hover {
+            background-color: #20304a;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
+        }
+
+        /* style each card title in the site's cyan accent color */
+        .card h2 {
             color: #00ffcc;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
         }
-        /* center the sound control buttons on the page, same as the meme controls */
-        #soundControls {
-            margin-top: 20px;
+
+        /* style each card description in plain white text */
+        .card p {
+            color: #ffffff;
+            font-size: 14px;
+            margin: 0;
         }
-        /* style the Play Sound button with the same cyan color as the Start button */
-        #playSoundBtn {
-            background-color: #00ffcc;
-            color: #101820;
-            border: none;
-            padding: 10px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            font-weight: bold;
-        }
-        /* style the Mute Sound button with the same red color as the Stop button */
-        #muteSoundBtn {
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            font-weight: bold;
-        }
-        /* style the area where sound status messages will appear */
-        #soundStatus {
-            margin-top: 12px;
-            font-size: 18px;
-            color: #00ffcc;
-        }
-        /* reset the old float-offset margin now that the footer lives inside the centered main wrapper */
+
+        /* reset the float-offset margin now that the footer lives inside the centered main wrapper */
         footer {
             margin-right: 0;
+            /* space the footer away from the card grid above it */
+            margin-top: 30px;
         }
     </style>
 </head>
 
-<!-- the body section holds the text and images that we want to show to the user -->
+<!-- the body section holds the text and links that we want to show to the user -->
 <body>
-    <!--this section holds the menu, pinned to the left of the page -->
+    <!-- this section holds the menu, pinned to the left of the page -->
     <header>
-       <!--create a nav section to hold the menu -->
-       <nav>
-        <!-- Menu heading -->
-        <h2>Menu</h2>
-         <!-- link back to the home page -->
-         <a href="index.html">Home</a>
-         <br>
-         <!-- link to the boards page -->
-         <a href="boards.html">Boards</a>
-         <br>
-         <!-- link to the game page -->
-         <a href="game.html">Game</a>
-         <br>
-         <!-- link to the strings page -->
-         <a href="strings.html">The Vault</a>
-         <br>
-         <!-- link to the table page -->
-         <a href="table.html">Table</a>
-       </nav>
+        <!-- create a nav section to hold the menu -->
+        <nav>
+            <!-- Menu heading -->
+            <h2>Menu</h2>
+            <!-- link to this landing page -->
+            <a href="index.html">Home</a>
+            <br>
+            <!-- link to the meme page -->
+            <a href="meme.html">Meme</a>
+            <br>
+            <!-- link to the boards page -->
+            <a href="boards.html">Boards</a>
+            <br>
+            <!-- link to the game page -->
+            <a href="game.html">Game</a>
+            <br>
+            <!-- link to the strings page -->
+            <a href="strings.html">The Vault</a>
+            <br>
+            <!-- link to the table page -->
+            <a href="table.html">Table</a>
+        </nav>
     </header>
 
-    <!-- main element centers all primary page content relative to the full page, matching game.html -->
+    <!-- main element centers all primary page content relative to the full page -->
     <main>
 
-    <!-- main heading displayed at the top of the page -->
-    <h1>Welcome to my CSC102 Home Page</h1>
+        <!-- main welcome heading displayed at the top of the page -->
+        <h1>Welcome to Oshay's CSC102 Project</h1>
 
-    <!-- paragraph holding the meme image that will be animated by button.js -->
-    <p>
-        <!-- img is the image tag; button.js will update its left and top to move it -->
-        <img id="memeImage" src="meme.png">
-    </p>
+        <!-- short intro paragraph describing the site -->
+        <p class="introText">
+            A semester-long collection of interactive web pages built as part of CSC102 at the
+            University of Advancing Technology. Explore the pages below to see the work.
+        </p>
 
-    <!-- div containing the Start and Stop control buttons -->
-    <div id="controls">
-        <!-- Start button: uses onclick to call startMoving from button.js, enabled by default -->
-        <button id="startBtn" onclick="startMoving()">Start</button>
-        <!-- Stop button: uses onclick to call stopMoving from button.js, disabled until Start is clicked -->
-        <button id="stopBtn" onclick="stopMoving()" disabled>Stop</button>
-    </div>
+        <!-- grid of clickable cards linking to every other page on the site -->
+        <div class="cardGrid">
 
-    <!-- div where status messages will be written using innerHTML -->
-    <div id="statusMessage"></div>
+            <!-- card link to the meme animation page -->
+            <a class="cardLink" href="meme.html">
+                <!-- card wrapper div holds the title and description -->
+                <div class="card">
+                    <!-- card title -->
+                    <h2>Meme</h2>
+                    <!-- card description -->
+                    <p>An animated bouncing meme with NASA ISS background audio.</p>
+                </div>
+            </a>
 
-    <!-- hidden audio element loaded with the NASA ISS background ambience track -->
-    <!-- loop attribute makes the track repeat automatically once it finishes -->
-    <audio id="bgAudio" src="us-lab-background.mp3" loop></audio>
+            <!-- card link to the boards page -->
+            <a class="cardLink" href="boards.html">
+                <!-- card wrapper div holds the title and description -->
+                <div class="card">
+                    <!-- card title -->
+                    <h2>Boards</h2>
+                    <!-- card description -->
+                    <p>Program objectives and boards for the 3D Maker &amp; Fabrication AS degree.</p>
+                </div>
+            </a>
 
-    <!-- div containing the Play and Mute buttons for the background sound -->
-    <div id="soundControls">
-        <!-- heading that introduces the background sound as a creative element -->
-        <h2>NASA ISS Background Sound</h2>
-        <!-- Play button: uses onclick to call playSound from sound.js, enabled by default -->
-        <button id="playSoundBtn" onclick="playSound()">Play Sound</button>
-        <!-- Mute button: uses onclick to call stopSound from sound.js, disabled until Play is clicked -->
-        <button id="muteSoundBtn" onclick="stopSound()" disabled>Mute Sound</button>
-    </div>
+            <!-- card link to the casino coin flip game page -->
+            <a class="cardLink" href="game.html">
+                <!-- card wrapper div holds the title and description -->
+                <div class="card">
+                    <!-- card title -->
+                    <h2>Game</h2>
+                    <!-- card description -->
+                    <p>Quarks Casino Coin Flip &mdash; place bets, track stats, and try your luck.</p>
+                </div>
+            </a>
 
-    <!-- div where sound status messages will be written using innerHTML -->
-    <div id="soundStatus"></div>
+            <!-- card link to the secret vault / palindrome checker page -->
+            <a class="cardLink" href="strings.html">
+                <!-- card wrapper div holds the title and description -->
+                <div class="card">
+                    <!-- card title -->
+                    <h2>The Vault</h2>
+                    <!-- card description -->
+                    <p>Identity validation, secret message reveal, and palindrome checker.</p>
+                </div>
+            </a>
 
-    <!-- footer section displays author and school contact information -->
-    <footer>
-        <!-- display the author's full name -->
-        Oshay White
-        <br>
-        <!-- display the name of the school -->
-        University of Advancing Technology
-        <br>
-        <!-- display the school street address -->
-        2625 W. Baseline Road
-        <br>
-        <!-- display city, state, and zip code -->
-        Tempe, AZ 85283-1056
-        <br>
-    </footer>
+            <!-- card link to the filament temperature reference table page -->
+            <a class="cardLink" href="table.html">
+                <!-- card wrapper div holds the title and description -->
+                <div class="card">
+                    <!-- card title -->
+                    <h2>Table</h2>
+                    <!-- card description -->
+                    <p>Reference chart of recommended 3D printer filament temperatures.</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- footer section displays author and school contact information -->
+        <footer>
+            <!-- display the author's full name -->
+            Oshay White
+            <br>
+            <!-- display the name of the school -->
+            University of Advancing Technology
+            <br>
+            <!-- display the school street address -->
+            2625 W. Baseline Road
+            <br>
+            <!-- display city, state, and zip code -->
+            Tempe, AZ 85283-1056
+            <br>
+        </footer>
 
     </main>
 
-    <!-- link to the external JavaScript file that contains the button functions -->
-    <script src="button.js"></script>
-    <!-- link to the external JavaScript file that contains the sound functions -->
-    <script src="sound.js"></script>
 </body>
 </html>
